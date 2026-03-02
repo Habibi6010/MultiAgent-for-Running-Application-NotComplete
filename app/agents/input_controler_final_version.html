@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Graph Viewer</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 16px; }
+        .mermaid { overflow: auto; border: 1px solid #ddd; padding: 12px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h2>Graph Diagram</h2>
+    <div class="mermaid">---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	classify_intent(classify_intent)
+	check_relevance(check_relevance)
+	check_completeness(check_completeness)
+	ask_clarifications(ask_clarifications)
+	build_handoff(build_handoff)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> classify_intent;
+	check_completeness -.-> ask_clarifications;
+	check_completeness -.-> build_handoff;
+	check_relevance -. &nbsp;irrelevant_end&nbsp; .-> __end__;
+	check_relevance -.-> check_completeness;
+	classify_intent --> check_relevance;
+	ask_clarifications --> __end__;
+	build_handoff --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
+</div>
+</body>
+</html>

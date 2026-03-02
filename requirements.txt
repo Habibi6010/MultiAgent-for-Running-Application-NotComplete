@@ -1,0 +1,17 @@
+# Sport Agent Requirements
+
+# LLM and AI frameworks
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-google-genai>=1.0.0
+langgraph>=0.0.20
+
+# Database
+supabase>=2.0.0
+
+# Core dependencies
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+
+# Utilities
+requests>=2.31.0
