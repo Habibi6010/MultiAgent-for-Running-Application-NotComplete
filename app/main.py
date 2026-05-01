@@ -27,7 +27,7 @@ def main():
     
     # Check required environment variables
     required_vars = {
-        "GOOGLE_API_KEY": "Google Gemini API key for LLM",
+        # "GOOGLE_API_KEY": "Google Gemini API key for LLM",
         "OPENAI_API_KEY": "OpenAI API key for LLM (alternative)",
     }
     

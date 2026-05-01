@@ -40,25 +40,132 @@ class ControllerState(TypedDict):
     ready: bool                      # gate to proceed
 
 
+# INTENT_SCHEMAS = {
+#   "training_plan": {
+#     "required": ["event", "level", "timeframe", "goal", "constraints"],
+#     "optional": ["weekly_days", "facility", "equipment", "injuries"]
+#   },
+#   "biomechanic": {
+#     "required": ["event", "phase", "question"],
+#     "optional": ["video_available", "metrics_available"]
+#   },
+#   "paper_search": {
+#     "required": ["topic", "keywords"],
+#     "optional": ["years", "venues", "multi_agent_required"]
+#   },
+#   "diet_plan": {
+#     "required": ["goal", "dietary_preferences", "timeframe"],
+#     "optional": ["restrictions", "allergies", "activity_level", "target_weight", "meals_per_day"]
+#   }
+# }
 INTENT_SCHEMAS = {
-  "training_plan": {
-    "required": ["event", "level", "timeframe", "goal", "constraints"],
-    "optional": ["weekly_days", "facility", "equipment", "injuries"]
-  },
-  "biomechanic": {
-    "required": ["event", "phase", "question"],
-    "optional": ["video_available", "metrics_available"]
-  },
-  "paper_search": {
-    "required": ["topic", "keywords"],
-    "optional": ["years", "venues", "multi_agent_required"]
-  },
-  "diet_plan": {
-    "required": ["goal", "dietary_preferences", "timeframe"],
-    "optional": ["restrictions", "allergies", "activity_level", "target_weight", "meals_per_day"]
-  }
-}
-
+            "training_plan": {
+                "required": [
+                    "primary_event",
+                    "primary_topic",
+                    "athlete_profile.experience_level",
+                    "athlete_profile.competition_level",
+                    "athlete_profile.age_group",
+                    "athlete_profile.sex",
+                    "running_goals.goal_type",
+                    "running_goals.target_event",
+                    "running_goals.target_date",
+                    "safety_flags_status",
+                ],
+                "optional": [
+                    "athlete_profile.best_performance",
+                    "athlete_profile.average_performance",
+                    "athlete_profile.primary_event",
+                    "athlete_profile.secondary_events",
+                    "athlete_profile.injury_history_summary",
+                    "performance_profile.max_velocity",
+                    "performance_profile.acceleration_30m",
+                    "performance_profile.absolute_force",
+                    "performance_profile.squat_1rm_proxy",
+                    "performance_profile.vertical_jump",
+                    "performance_profile.broad_jump",
+                    "performance_profile.total_mechanics_practice_time",
+                    "performance_profile.rsi",
+                    "performance_profile.mile_time",
+                    "performance_profile.vo2_max",
+                    "performance_profile.weekly_mileage",
+                    "performance_profile.maximum_heart_rate",
+                    "performance_profile.resting_heart_rate",
+                    "safety_flags",
+                ],
+            },
+            "recovery": {
+                "required": [
+                    "primary_event",
+                    "primary_topic",
+                    "athlete_profile.experience_level",
+                    "running_goals.goal_type",
+                    "safety_flags_status",
+                ],
+                "optional": [
+                    "athlete_profile.injury_history_summary",
+                    "performance_profile.weekly_mileage",
+                    "performance_profile.resting_heart_rate",
+                    "running_goals.target_date",
+                    "safety_flags",
+                ],
+            },
+            "performance_improvement": {
+                "required": [
+                    "primary_event",
+                    "primary_topic",
+                    "athlete_profile.experience_level",
+                    "running_goals.goal_type",
+                    "running_goals.target_event",
+                    "running_goals.target_date",
+                    "safety_flags_status",
+                ],
+                "optional": [
+                    "athlete_profile.best_performance",
+                    "athlete_profile.average_performance",
+                    "performance_profile.max_velocity",
+                    "performance_profile.acceleration_30m",
+                    "performance_profile.absolute_force",
+                    "performance_profile.rsi",
+                    "performance_profile.mile_time",
+                    "performance_profile.vo2_max",
+                    "safety_flags",
+                ],
+            },
+            "race_preparation": {
+                "required": [
+                    "primary_event",
+                    "primary_topic",
+                    "athlete_profile.experience_level",
+                    "running_goals.target_event",
+                    "running_goals.target_date",
+                    "safety_flags_status",
+                ],
+                "optional": [
+                    "athlete_profile.best_performance",
+                    "performance_profile.weekly_mileage",
+                    "performance_profile.maximum_heart_rate",
+                    "performance_profile.resting_heart_rate",
+                    "safety_flags",
+                ],
+            },
+            "general_running_advice": {
+                "required": [
+                    "primary_event",
+                    "primary_topic",
+                    "athlete_profile.experience_level",
+                    "running_goals.goal_type",
+                    "safety_flags_status",
+                ],
+                "optional": [
+                    "athlete_profile.age_group",
+                    "athlete_profile.sex",
+                    "running_goals.target_event",
+                    "running_goals.target_date",
+                    "safety_flags",
+                ],
+            },
+        }
 
 def classify_intent_node(state: ControllerState) -> ControllerState:
     """
